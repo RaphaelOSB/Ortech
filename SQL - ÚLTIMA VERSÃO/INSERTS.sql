@@ -1,6 +1,5 @@
----------------------------CLIENTES---------------------------------------------------------------------------------------------------------------
-INSERT INTO Cliente (cpf, nome, telefone, email, data_nascimento, sexo)
-VALUES ('12345678900', 'Maria da Silva', '(11) 99999-9999', 'maria.silva@gmail.com', '1990-01-01', 'F');
+INSERT INTO Cliente (cpf, nome, telefone, email, data_nascimento, sexo, senha)
+VALUES ('12345678900', 'Maria da Silva', '(11) 99999-9999', 'maria.silva@gmail.com', '1990-01-01', 'F', '12345678');
 go
 ---------------------------FUNCIONARIOS-------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
@@ -46,70 +45,222 @@ go
 --4
 INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida)
 VALUES ('Yakisoba Tradicional', 'Macarrão frito com legumes, carne ou frango e molho especial', 2, 24.99, 'unidade');
+-- Inserir bebida 1
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Cerveja', 'Cerveja gelada de marca famosa', 8, 5.99, 'Unidade', NULL);
+
+-- Inserir bebida 2
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Refrigerante', 'Refrigerante de cola', 8, 5.99, 'Unidade', NULL);
+
+-- Inserir bebida 3
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Água Mineral', 'Água mineral sem gás', 8, 2.49, 'Unidade', NULL);
 -------------------------------Insumos----------------------------------------------------------------------------------------
 --1
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Arroz', 'Arroz japonês', 1, 10000, 'gramas', '2023-02-01', '2023-06-30');
+VALUES ('Arroz', 'Arroz japonês', 1, 100000, 'gramas', '2023-02-01', '2023-06-30');
 go
 --2
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Alga Nori', 'Alga seca para enrolar o sushi', 2, 500, 'folhas', '2023-02-01', '2023-12-31');
+VALUES ('Alga Nori', 'Alga seca para enrolar o sushi', 2, 5000, 'folhas', '2023-02-01', '2023-12-31');
 go
 --3
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Salmão', 'Salmão fresco para sushi', 2, 5000, 'gramas', '2023-02-01', '2023-06-15');
+VALUES ('Salmão', 'Salmão fresco para sushi', 2, 50000, 'gramas', '2023-02-01', '2023-06-15');
 go
 --4
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Pepino', 'Pepino fresco para sushi', 1, 5000, 'unidade', '2023-02-01', '2023-06-20');
+VALUES ('Pepino', 'Pepino fresco para sushi', 1, 50000, 'unidade', '2023-02-01', '2023-06-20');
 go
 --5
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Cenoura', 'Cenoura fresca para sushi', 2, 5000, 'unidade', '2023-02-01', '2023-06-25');
+VALUES ('Cenoura', 'Cenoura fresca para sushi', 2, 50000, 'unidade', '2023-02-01', '2023-06-25');
 go
 --6
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Camarão', 'Camarão fresco para sushi', 1, 5000, 'gramas', '2023-02-01', '2023-06-22');
+VALUES ('Camarão', 'Camarão fresco para sushi', 1, 50000, 'gramas', '2023-02-01', '2023-06-22');
 go
 --7
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Macarrão', 'Macarrão para yakisoba', 1, 5000, 'gramas', '2023-02-01', '2023-06-30');
+VALUES ('Macarrão', 'Macarrão para yakisoba', 1, 50000, 'gramas', '2023-02-01', '2023-06-30');
 go
 --8
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Carne de Porco', 'Carne de porco para yakisoba', 2, 3000, 'gramas', GETDATE(), '2023-06-15');
+VALUES ('Carne de Porco', 'Carne de porco para yakisoba', 2, 30000, 'gramas', GETDATE(), '2023-06-15');
 go
 --9 
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Repolho', 'Repolho picado para yakisoba', 2, 2000, 'gramas', '2023-02-01', '2023-06-20');
+VALUES ('Repolho', 'Repolho picado para yakisoba', 2, 20000, 'gramas', '2023-02-01', '2023-06-20');
 go
 --10
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Brócolis', 'Brócolis para yakisoba', 1, 1000, 'unidade', '2023-02-01', '2023-06-22');
+VALUES ('Brócolis', 'Brócolis para yakisoba', 1, 10000, 'unidade', '2023-02-01', '2023-06-22');
 go
 --11
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Frango', 'Pedacinhos de frango para robata', 2, 3000, 'gramas', GETDATE(), '2023-06-15');
+VALUES ('Frango', 'Pedacinhos de frango para robata', 2, 30000, 'gramas', GETDATE(), '2023-06-15');
 go
 --12
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Carne', 'Pedacinhos de carne bovina para robata', 1, 3000, 'gramas', GETDATE(), '2023-06-15');
+VALUES ('Carne', 'Pedacinhos de carne bovina para robata', 1, 30000, 'gramas', GETDATE(), '2023-06-15');
 go
 --13
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Palitos de Bambu', 'Palitos de bambu para espetinhos', 2, 5000, 'unidades', GETDATE(), '2023-12-31');
+VALUES ('Palitos de Bambu', 'Palitos de bambu para espetinhos', 2, 50000, 'unidades', GETDATE(), '2023-12-31');
 go
 --14
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Cebola', 'Cebola', 1, 5000, 'unidade', GETDATE(), '2023-06-25');
+VALUES ('Cebola', 'Cebola', 1, 50000, 'unidade', GETDATE(), '2023-06-25');
 go
 --15
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Pimentão', 'Pimentão cortado', 1, 1000, 'unidade', GETDATE(), '2023-06-18');
+VALUES ('Pimentão', 'Pimentão cortado', 1, 10000, 'unidade', GETDATE(), '2023-06-18');
 go
 --16
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
-VALUES ('Cream Cheese', 'Cream cheese', 2, 5000, 'gramas', GETDATE(), '2023-12-31');
+VALUES ('Cream Cheese', 'Cream cheese', 2, 50000, 'gramas', GETDATE(), '2023-12-31');
+
+
+-- Inserir prato de Sushi
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Sushi Misto', 'Variedade de sushis com salmão, atum e camarão', 1, 29.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Sushi
+-- Arroz
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (8, 1, 300, 'gramas');
+
+-- Alga Nori
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (8, 2, 3, 'folhas');
+
+-- Salmão
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (8, 3, 200, 'gramas');
+
+-- Pepino
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (8, 4, 50, 'unidade');
+
+-- Inserir prato de Yakisoba
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Yakisoba de Frango', 'Macarrão frito com pedaços de frango e legumes', 4, 15.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Yakisoba
+-- Macarrão
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (9, 7, 200, 'gramas');
+
+-- Carne de Porco
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (9, 8, 100, 'gramas');
+
+-- Repolho
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (9, 9, 50, 'gramas');
+
+-- Brócolis
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (9, 10, 20, 'unidade');
+
+
+-- Inserir prato de Sashimi
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Sashimi de Salmão', 'Salmão fresco cortado em fatias finas', 2, 24.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Sashimi
+-- Salmão
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (10, 3, 150, 'gramas');
+
+-- Inserir prato de Tempurá
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Tempurá de Camarão', 'Camarões empanados e fritos', 3, 18.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Tempurá
+-- Camarão
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (11, 6, 100, 'gramas');
+
+-- Inserir prato de Robata
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Robata de Frango', 'Espetinhos de frango grelhados', 7, 12.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Robata
+-- Frango
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (12, 11, 150, 'gramas');
+
+-- Inserir prato de Teriyaki
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Frango Teriyaki', 'Frango grelhado com molho teriyaki', 4, 14.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Teriyaki
+-- Frango
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (13, 11, 100, 'gramas');
+
+-- Inserir prato de Nigiri Sushi
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Nigiri Sushi de Salmão', 'Salmão fresco sobre arroz temperado', 6, 6.99, 'Unidade', NULL);
+
+-- Associar insumos ao prato de Nigiri Sushi
+-- Salmão
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (14, 3, 15, 'gramas');
+
+-- Arroz
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (14, 1, 50, 'gramas');
+
+-- Inserir prato de Temaki
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Temaki de Atum', 'Atum fresco, arroz e outros ingredientes enrolados em alga', 5, 9.99, 'Unidade', NULL);
+
+-- Associar insumos ao prato de Temaki
+-- Atum
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (15, 3, 20, 'gramas');
+
+-- Alga Nori
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (15, 2, 1, 'folhas');
+
+-- Arroz
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (15, 1, 50, 'gramas');
+
+-- Inserir prato de Yakisoba
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Yakisoba de Legumes', 'Macarrão frito com legumes e molho especial', 4, 18.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Yakisoba
+-- Macarrão
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (16, 7, 200, 'gramas');
+
+-- Repolho
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (16, 9, 100, 'gramas');
+
+-- Cenoura
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (16, 5, 50, 'gramas');
+
+-- Inserir prato de Gyoza
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Gyoza', 'Pastéis recheados com carne e legumes', 1, 8.99, 'Porção', NULL);
+
+-- Associar insumos ao prato de Gyoza
+-- Carne de Porco
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (17, 8, 100, 'gramas');
+
+-- Repolho
+INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
+VALUES (17, 9, 50, 'gramas');
+
 
 -----------------------------------------Insumos Produtos------------------------------------------------------------------
 -------FAZER HOT ROLL---------
@@ -168,4 +319,7 @@ VALUES
     (2, 16, 20, 'gramas'),
     -- Insumo: Pepino
     (2, 4, 2, 'unidade')
----------------------------------------------------------------------------------------------------------------------------
+-----------------------------FAVORITOS-----------------------------------------------------------------------------------------------
+INSERT INTO Favorito (cpf, id_produto) VALUES ('12345678900', 1);
+INSERT INTO Favorito (cpf, id_produto) VALUES ('12345678900', 2);
+INSERT INTO Favorito (cpf, id_produto) VALUES ('12345678900', 3);
