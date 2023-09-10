@@ -48,12 +48,14 @@ go
 -- Criação da tabela Pedido
 CREATE TABLE Pedido (
   id_pedido INT IDENTITY NOT NULL PRIMARY KEY,
-  cpf VARCHAR(11) NOT NULL,
+  cpf VARCHAR(11) NULL,
+  id_funcionario INT NULL,
   data_pedido DATETIME NOT NULL,
   valor_total DECIMAL(10, 2) NOT NULL,
   formapagamento VARCHAR(100) NOT NULL,
   numero_mesa INT NOT NULL,
   FOREIGN KEY (cpf) REFERENCES Cliente (cpf),
+  FOREIGN KEY (id_funcionario) REFERENCES Funcionario (id_funcionario),
   FOREIGN KEY (numero_mesa) REFERENCES Mesa (numero_mesa)
 );
 go
@@ -784,8 +786,89 @@ EXEC usp_InserirPedido
 
 drop procedure usp_InserirPedido
 ---------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE usp_InserirPedidoFunc
+   @id_funcionario INT,
+    @data_pedido DATETIME,
+    @formapagamento VARCHAR(100),
+    @numero_mesa INT,
+    @produtos AS dbo.ProdutosType READONLY
+AS
+BEGIN
+    DECLARE @id_pedido INT;
+
+    -- Iniciar uma transação para garantir a integridade dos dados
+    BEGIN TRANSACTION;
+
+    -- Inserir o pedido na tabela Pedido
+    INSERT INTO Pedido (id_funcionario, data_pedido, valor_total, formapagamento, numero_mesa)
+    VALUES (@id_funcionario, CONVERT(DATETIME, @data_pedido, 120), 0.0, @formapagamento, @numero_mesa);
+
+    -- Obter o ID do pedido recém-inserido
+    SET @id_pedido = SCOPE_IDENTITY();
+
+    -- Inserir os detalhes do pedido na tabela DetalhesPedido
+    INSERT INTO DetalhesPedido (id_pedido, id_produto, quantidade_produto, valor_unitario, observacoes)
+    SELECT @id_pedido, dp.id_produto, dp.quantidade_produto, p.preco, dp.observacoes
+    FROM @produtos dp
+    JOIN Produtos p ON dp.id_produto = p.id_produto;
+
+    -- Atualizar o valor total do pedido
+    UPDATE Pedido
+    SET valor_total = (
+        SELECT SUM(d.quantidade_produto * d.valor_unitario)
+        FROM DetalhesPedido d
+        WHERE d.id_pedido = @id_pedido
+    )
+    WHERE id_pedido = @id_pedido;
+
+    -- Ocupar a mesa
+    UPDATE Mesa
+    SET status_mesa = 'Ocupada'
+    WHERE numero_mesa = @numero_mesa;
+
+    -- Inserir o status do pedido na tabela StatusPedido
+    INSERT INTO StatusPedido (id_pedido)
+    VALUES (@id_pedido);
+
+    -- Subtrair os insumos do estoque com base nos produtos do pedido
+    UPDATE Insumos
+    SET estoque = estoque - (
+        SELECT SUM(dp.quantidade_produto * ip.quantidade_insumo)
+        FROM @produtos dp
+        JOIN InsumosProduto ip ON dp.id_produto = ip.id_produto
+        WHERE ip.id_insumo = Insumos.id_insumo
+    )
+    WHERE id_insumo IN (
+        SELECT ip.id_insumo
+        FROM @produtos dp
+        JOIN InsumosProduto ip ON dp.id_produto = ip.id_produto
+    );
+
+    -- Commit da transação, confirmando as mudanças no banco de dados
+    COMMIT TRANSACTION;
+END;
+-----------------------------------------------------------------------
+
+--executar a procedure acima
+DECLARE @produtos dbo.ProdutosType;
+
+INSERT INTO @produtos (id_produto, quantidade_produto, observacoes)
+VALUES
+    (4, 1,'Sem cebola'),
+    (2, 1,'Com molho extra'),
+    (1, 1,'Com queijo'), 
+	(3, 1,'Com queijo'),
+	(5, 1,'')
 	
-	
+EXEC usp_InserirPedidoFunc
+    @id_funcionario = 1,
+    @data_pedido = '2023-05-19T12:34:56',
+    @formapagamento = 'Cartão de crédito',
+    @numero_mesa = 4,
+    @produtos = @produtos
+
+drop procedure usp_InserirPedido
+---------------------------------------------------------------------------------------------------------------	
 	DELETE FROM Pedido WHERE id_pedido = 12
 
 /*
