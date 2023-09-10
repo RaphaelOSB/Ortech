@@ -145,8 +145,8 @@ go
 CREATE TABLE DetalhesPedido (
    id_pedido INT NOT NULL,
    id_produto INT NOT NULL,
+   valor_unitario Decimal(10,2) NOT NULL,
    quantidade_produto INT NOT NULL,
-   valor_unitario DECIMAL(10, 2) NOT NULL,
    observacoes VARCHAR(100),
    PRIMARY KEY (id_pedido, id_produto),
    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido) ON DELETE CASCADE,
@@ -662,7 +662,7 @@ END
 
 exec usp_cancelar_reserva '12345678900', 2, '1900-01-01 10:00:00'
 -------------------------------------------------------------------------------------------------------------
-CREATE PROCEDURE usp_InserirPedido
+	CREATE PROCEDURE usp_InserirPedido
     @cpf VARCHAR(11),
     @data_pedido DATETIME,
     @formapagamento VARCHAR(100),
@@ -673,7 +673,6 @@ BEGIN
     DECLARE @id_pedido INT;
     DECLARE @status_mesa VARCHAR(100);
     DECLARE @ultimo_pedido_cpf VARCHAR(11);
-    DECLARE @valor_total DECIMAL(10, 2);
 
     -- Verificar o status da mesa
     SELECT @status_mesa = status_mesa
@@ -716,19 +715,24 @@ BEGIN
 
     -- Inserir o pedido na tabela Pedido
     INSERT INTO Pedido (cpf, data_pedido, valor_total, formapagamento, numero_mesa)
-    VALUES (@cpf, CONVERT(DATETIME, @data_pedido, 120), 0.0, @formapagamento, @numero_mesa);
+    VALUES (@cpf, CONVERT(DATETIME, @data_pedido, 120), 1, @formapagamento, @numero_mesa);
 
     -- Obter o ID do pedido recém-inserido
     SET @id_pedido = SCOPE_IDENTITY();
 
-    -- Calcular o valor total do pedido com base nos produtos selecionados
-    SELECT @valor_total = SUM(p.preco * dp.quantidade_produto)
-    FROM @produtos dp
-    JOIN Produtos p ON dp.id_produto = p.id_produto;
+    -- Inserir os detalhes do pedido na tabela DetalhesPedido
+    INSERT INTO DetalhesPedido (id_pedido, id_produto, quantidade_produto, valor_unitario, observacoes)
+SELECT @id_pedido, dp.id_produto, dp.quantidade_produto, p.preco, dp.observacoes
+FROM @produtos dp
+JOIN Produtos p ON dp.id_produto = p.id_produto;
 
     -- Atualizar o valor total do pedido
     UPDATE Pedido
-    SET valor_total = @valor_total
+    SET valor_total = (
+        SELECT SUM(d.quantidade_produto * d.valor_unitario)
+        FROM DetalhesPedido d
+        WHERE d.id_pedido = @id_pedido
+    )
     WHERE id_pedido = @id_pedido;
 
     -- Ocupar a mesa
@@ -740,23 +744,24 @@ BEGIN
     INSERT INTO StatusPedido (id_pedido)
     VALUES (@id_pedido);
 
+    
     -- Subtrair os insumos do estoque com base nos produtos do pedido
-    UPDATE Insumos
-    SET estoque = estoque - (
-        SELECT SUM(dp.quantidade_produto * ip.quantidade_insumo)
-        FROM @produtos dp
-        JOIN InsumosProduto ip ON dp.id_produto = ip.id_produto
-        WHERE ip.id_insumo = Insumos.id_insumo
-    )
-    WHERE id_insumo IN (
-        SELECT ip.id_insumo
-        FROM @produtos dp
-        JOIN InsumosProduto ip ON dp.id_produto = ip.id_produto
-    );
-
+UPDATE Insumos
+SET estoque = estoque - (
+    SELECT SUM(dp.quantidade_produto * ip.quantidade_insumo)
+    FROM @produtos dp
+    JOIN InsumosProduto ip ON dp.id_produto = ip.id_produto
+    WHERE ip.id_insumo = Insumos.id_insumo
+)
+WHERE id_insumo IN (
+    SELECT ip.id_insumo
+    FROM @produtos dp
+    JOIN InsumosProduto ip ON dp.id_produto = ip.id_produto
+);
     -- Commit da transação, confirmando as mudanças no banco de dados
     COMMIT TRANSACTION;
 END;
+
 -----------------------------------------------------------------------
 
 --executar a procedure acima
@@ -764,18 +769,17 @@ DECLARE @produtos dbo.ProdutosType;
 
 INSERT INTO @produtos (id_produto, quantidade_produto, observacoes)
 VALUES
-    (4, 2,'Sem cebola'),
+    (4, 1,'Sem cebola'),
     (2, 1,'Com molho extra'),
-    (1, 10,'Com queijo'), 
-	(3, 10, 'Com queijo'),
-	(5, 3, '')
+    (1, 1,'Com queijo'), 
+	(3, 1,'Com queijo'),
+	(5, 1,'')
 	
-
 EXEC usp_InserirPedido
     @cpf = '12345678900',
     @data_pedido = '2023-05-19T12:34:56',
     @formapagamento = 'Cartão de crédito',
-    @numero_mesa = 3,
+    @numero_mesa = 4,
     @produtos = @produtos
 
 drop procedure usp_InserirPedido
