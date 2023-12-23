@@ -3,8 +3,39 @@ VALUES ('12345678900', 'Maria da Silva', '(11) 99999-9999', 'maria.silva@gmail.c
 go
 ---------------------------FUNCIONARIOS-------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Admin', '(00) 00000-0000', 'admin@gmail.com', 'Administrador', 'Noturno', 2000.00, 'Rua A, 123', '01000-000', '00000000000', '1995-05-10', 'M', '12345678', '2023-01-01');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
 VALUES ('João Souza', '(11) 98888-8888', 'joao.souza@gmail.com', 'Atendente', 'Noturno', 2000.00, 'Rua A, 123', '01000-000', '11122233344', '1995-05-10', 'M', '12345678', '2022-01-01');
 go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Raphael', '(11) 98888-8888', 'rapha.rapha@gmail.com', 'Atendente', 'Noturno', 2000.00, 'Rua A, 123', '01000-000', '11122233345', '1995-05-10', 'M', '12345678', '2022-01-01');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Maria Silva', '(11) 97777-7777', 'maria.silva@gmail.com', 'Cozinheiro', 'Noturno', 2500.00, 'Rua B, 456', '02000-000', '22233344455', '1980-08-15', 'F', '87654321', '2022-02-15');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Carlos Oliveira', '(11) 96666-6666', 'carlos.oliveira@gmail.com', 'Administrador', 'Diurno', 4000.00, 'Rua C, 789', '03000-000', '33344455566', '1990-03-20', 'M', '13579246', '2022-03-10');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Ana Santos', '(11) 95555-5555', 'ana.santos@gmail.com', 'Administrador', 'Diurno', 4000.00, 'Rua D, 101', '04000-000', '44455566677', '1988-11-25', 'F', '98765432', '2022-04-05');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Roberto Lima', '(11) 94444-4444', 'roberto.lima@gmail.com', 'Atendente', 'Diurno', 2000.00, 'Rua E, 789', '05000-000', '55566677788', '1982-07-18', 'M', '11223344', '2022-05-20');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Juliana Pereira', '(11) 93333-3333', 'juliana.pereira@gmail.com', 'Atendente', 'Noturno', 2000.00, 'Rua F, 234', '06000-000', '66677788899', '1985-12-08', 'F', '99887766', '2022-06-15');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Ricardo Costa', '(11) 92222-2222', 'ricardo.costa@gmail.com', 'Cozinheiro', 'Noturno', 2500.00, 'Rua G, 567', '07000-000', '77788899900', '1993-04-30', 'M', '55443322', '2022-07-10');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Fernanda Martins', '(11) 91111-1111', 'fernanda.martins@gmail.com', 'Administrador', 'Diurno', 4000.00, 'Rua H, 890', '08000-000', '88899900011', '1998-09-22', 'F', '11223355', '2022-08-05');
+go
+INSERT INTO Funcionario (nome, telefone, email, cargo, turno, salario, endereco, CEP, cpf, data_nascimento, sexo, senha, data_contratacao)
+VALUES ('Gustavo Oliveira', '(11) 90000-0000', 'gustavo.oliveira@gmail.com', 'Atendente', 'Noturno', 2000.00, 'Rua I, 111', '09000-000', '99900011122', '1996-01-12', 'M', '33445566', '2022-09-18');
+go
+
 -----------------------------MESAS-----------------------------------------------------------------------------------------
 INSERT INTO Mesa (numero_mesa, capacidade_mesa) VALUES 
 (1, 4),(2, 6),(3, 2),(4, 8),(5, 4),(6, 2),
@@ -28,7 +59,8 @@ VALUES
 ('Temaki', 'Cone de alga recheado com arroz, peixe e vegetais.'),
 ('Nigiri', 'Bolinhas de arroz com um pedaço de peixe, fruto do mar ou ovo em cima.'),
 ('Robata', 'Espetinhos de carne, frutos do mar ou legumes grelhados em carvão vegetal'),
-('Bebidas', 'Acompanhamento')
+('Bebidas', 'Acompanhamento'),
+('Sobremesas', 'Sobremesa')
 -------------------------------Produtos---------------------------------------------------------------------------------------
 --1
 INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida)
@@ -44,10 +76,10 @@ VALUES ('Robata', 'Espetinho grelhado com diversos tipos de carnes e legumes', 7
 go
 --4
 INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida)
-VALUES ('Yakisoba Tradicional', 'Macarrão frito com legumes, carne ou frango e molho especial', 2, 24.99, 'unidade');
+VALUES ('Yakisoba Tradicional', 'Macarrão frito com legumes, carne ou frango e molho especial', 4, 24.99, 'unidade');
 -- Inserir bebida 1
 INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
-VALUES ('Cerveja', 'Cerveja gelada de marca famosa', 8, 5.99, 'Unidade', NULL);
+VALUES ('Cerveja', 'Cerveja gelada de marca famosa', 8, 10.99, 'Unidade', NULL);
 
 -- Inserir bebida 2
 INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
@@ -56,6 +88,7 @@ VALUES ('Refrigerante', 'Refrigerante de cola', 8, 5.99, 'Unidade', NULL);
 -- Inserir bebida 3
 INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
 VALUES ('Água Mineral', 'Água mineral sem gás', 8, 2.49, 'Unidade', NULL);
+
 -------------------------------Insumos----------------------------------------------------------------------------------------
 --1
 INSERT INTO Insumos (nome_insumo, descricao, id_fornecedor, estoque, unidade_medida, data_entrada, data_validade)
@@ -248,20 +281,6 @@ VALUES (16, 9, 100, 'gramas');
 INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
 VALUES (16, 5, 50, 'gramas');
 
--- Inserir prato de Gyoza
-INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
-VALUES ('Gyoza', 'Pastéis recheados com carne e legumes', 1, 8.99, 'Porção', NULL);
-
--- Associar insumos ao prato de Gyoza
--- Carne de Porco
-INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
-VALUES (17, 8, 100, 'gramas');
-
--- Repolho
-INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
-VALUES (17, 9, 50, 'gramas');
-
-
 -----------------------------------------Insumos Produtos------------------------------------------------------------------
 -------FAZER HOT ROLL---------
 INSERT INTO InsumosProduto (id_produto, id_insumo, quantidade_insumo, unidade_medida)
@@ -319,7 +338,131 @@ VALUES
     (2, 16, 20, 'gramas'),
     -- Insumo: Pepino
     (2, 4, 2, 'unidade')
+
+
+-- Inserir prato de Gyoza
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Gyoza', 'Pastéis recheados com carne e legumes', 1, 8.99, 'Porção', NULL);
+
+
+-- Inserir prato de Tataki de Salmão
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Tataki de Salmão', 'Salmão fresco levemente grelhado e fatiado, servido com molho ponzu e cebolinha', 2, 21.99, 'Porção', NULL);
+
+
+-- Inserir novo prato Sunomono
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Sunomono', 'Salada de pepino finamente fatiado com molho agridoce', 1, 8.99, 'Porção', NULL);
+
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Saquê', 'Saquê japonês tradicional', 8, 15.99, 'Garrafa', NULL);
+
+-- Inserir bebida 5
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Chá Verde', 'Chá verde japonês', 8, 6.99, 'Xícara', NULL);
+
+-- Inserir bebida 12
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Coquetel de Frutas', 'Coquetel de frutas tropicais com ou sem álcool', 8, 7.99, 'Copo', NULL);
+
+-- Inserir novo prato 20
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Donburi de Salmão', 'Tigela de arroz coberta com salmão fresco', 4, 19.99, 'Unidade', NULL);
+
+-- Inserir novo prato 31
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Gyudon', 'Tigela de arroz com carne de boi, cebola e molho especial', 4, 15.99, 'Porção', NULL);
+
+-- Inserir novo prato 35
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Tofu Frito', 'Tofu crocante servido com molho especial', 3, 8.99, 'Porção', NULL);
+
+-- Sobremesas
+
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Dorayaki', 'Bolo recheado com pasta de feijão doce', 9, 5.99, 'unidade', NULL)
+
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Mochi', 'Bolinhos de arroz glutinoso com diversos sabores', 9, 3.99, 'unidade', NULL)
+
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Taiyaki', 'Waffle em forma de peixe recheado', 9, 4.99, 'unidade', NULL)
+
+-----------sobremesas
+INSERT INTO Produtos (nome_produto, descricao, id_categoriaprod, preco, unidade_medida, img_prato)
+VALUES ('Dorayaki', 'Bolo recheado com pasta de feijão doce', 9, 5.99, 'unidade', NULL),
+('Mochi', 'Bolinhos de arroz glutinoso com diversos sabores', 9, 3.99, 'unidade', NULL),
+('Taiyaki', 'Waffle em forma de peixe recheado', 9, 4.99, 'unidade', NULL);
+-----------------------------FAVORITOS-----------------------------------------------------------------------------------------------
 -----------------------------FAVORITOS-----------------------------------------------------------------------------------------------
 INSERT INTO Favorito (cpf, id_produto) VALUES ('12345678900', 1);
 INSERT INTO Favorito (cpf, id_produto) VALUES ('12345678900', 2);
 INSERT INTO Favorito (cpf, id_produto) VALUES ('12345678900', 3);
+---------------------------------------------------------------------------------------------------------------------------
+-- Inserir avaliação 1
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 1, 5, 'Produto excelente!', GETDATE());
+
+-- Inserir avaliação 2
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 2, 4, 'Muito bom, mas pode melhorar.', GETDATE());
+
+-- Inserir avaliação 3
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 3, 5, 'Recomendo a todos!', GETDATE());
+
+-- Inserir avaliação 4
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 4, 3, 'Produto ok.', GETDATE());
+
+-- Inserir avaliação 5
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 5, 4, 'Bom custo-benefício.', GETDATE());
+
+-- Inserir avaliação 6
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 6, 2, 'Não gostei muito.', GETDATE());
+
+-- Inserir avaliação 7
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 7, 5, 'Maravilhoso!', GETDATE());
+
+-- Inserir avaliação 8
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 8, 4, 'Recomendo para todos.', GETDATE());
+
+-- Inserir avaliação 9
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 9, 3, 'Poderia ser melhor.', GETDATE());
+
+-- Inserir avaliação 10
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 10, 4, 'Boa qualidade.', GETDATE());
+
+-- Inserir avaliação 11
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 11, 5, 'Excelente escolha!', GETDATE());
+
+-- Inserir avaliação 12
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 12, 3, 'Poderia ser mais barato.', GETDATE());
+
+-- Inserir avaliação 13
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 13, 4, 'Gostei bastante.', GETDATE());
+
+-- Inserir avaliação 14
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 14, 5, 'Top demais!', GETDATE());
+
+-- Inserir avaliação 15
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 15, 2, 'Não atendeu minhas expectativas.', GETDATE());
+
+-- Inserir avaliação 16
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 16, 4, 'Bom produto, recomendo.', GETDATE());
+
+-- Inserir avaliação 17
+INSERT INTO Avaliacao (cpf, id_produto, estrelas, comentario_avaliacao, data_avaliacao)
+VALUES ('12345678900', 17, 5, 'Fantástico!', GETDATE());
